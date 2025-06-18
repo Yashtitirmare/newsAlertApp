@@ -7,7 +7,13 @@ const cron = require('node-cron');
 const fetchNewsAndSendEmails = require('./services/newsFetcher');
 
 const app = express();
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(cors({
+  origin: [
+    "http://localhost:3000", // local
+    "https://newsalertapp-1.onrender.com" // deployed frontend URL
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI)
